@@ -28,13 +28,12 @@ export class TeamsComponent implements OnInit {
   ngOnInit() {
   }
 
-  safeHref(href: string) {
-    
-    return this.santizer.bypassSecurityTrustUrl(href);
+  href(href: string) {
+    window.location.href = href;
   }
-
+  
   getTeams() {
     return this.teamService.getAllTeams();
-  } 
+  }
 
 }

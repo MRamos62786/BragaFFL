@@ -6,14 +6,9 @@
       {{team.owner}}
     </md-card-content>
     <md-card-actions align="end">
-      <button md-icon-button (click)="1"><md-icon>phone</md-icon></button>
-      <button md-icon-button (click)="1"><md-icon>sms</md-icon></button>
-      <button md-icon-button (click)="1"><md-icon>mail</md-icon></button>
-      <!--
-      <a [href]="safeHref('tel:' + team.mobile)" md-button color="primary"></a>
-      <a [href]="safeHref('sms:' + team.mobile)" md-button color="primary">Text</a>
-      <a [href]="safeHref('mailto:' + team.email)" md-button color="primary">Email</a>
-      -->
+      <button md-icon-button (click)="href('tel:' + team.mobile)"><md-icon>phone</md-icon></button>
+      <button md-icon-button (click)="href('sms:' + team.mobile)"><md-icon>sms</md-icon></button>
+      <button md-icon-button (click)="href('mailto:' + team.email)"><md-icon>mail</md-icon></button>
     </md-card-actions>
   </md-card>
 </div>
