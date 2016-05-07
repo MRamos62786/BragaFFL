@@ -1,0 +1,4 @@
+<button md-button *ngFor="let rulebook of rulebookButtons" [class.selected]=isSelected(rulebook) (click)="change(rulebook)">{{rulebook.year}}</button>
+<button md-button *ngIf="!showAll" (click)="show(true)">More...</button>
+<button md-button *ngIf="showAll" (click)="show(false)">Less...</button>
+<iframe [src]="rulebookSrc()" width="100%" height="10000px"></iframe>

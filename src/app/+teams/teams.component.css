@@ -1,0 +1,25 @@
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.secondary {
+  color: rgba(0,0,0,0.54);
+}
+
+md-card {
+  width: 350px;
+  box-sizing: border-box;
+  margin: 16px;
+}
+
+.card-container {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+img {
+    width: 350px;
+    height: 300px
+}

@@ -3,11 +3,35 @@
  **********************************************************************************************/
 /** Map relative paths to URLs. */
 const map: any = {
+  '@angular2-material': 'vendor/@angular2-material'
 };
 
 /** User packages configuration. */
-const packages: any = {
-};
+const materialPackages:string[] = [
+  'core',
+  'toolbar',
+  'icon',
+  'button',
+  'sidenav',
+  'list',
+  'card',
+  'input',
+  'radio',
+  'checkbox'
+];
+
+const packages:any = createCustomConfig(materialPackages);
+
+function createCustomConfig(packages: string[]): any {
+  return packages.reduce((packageConfig: any, packageName: string) => {
+    packageConfig[`@angular2-material/${packageName}`] = {
+      format: 'cjs',
+      defaultExtension: 'js',
+      main: packageName
+    };
+    return packageConfig;
+  }, {});
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 /***********************************************************************************************
@@ -29,6 +53,9 @@ const barrels: string[] = [
   // App specific barrels.
   'app',
   'app/shared',
+  'app/+home',
+  'app/+teams',
+  'app/+rulebook',
   /** @cli-barrel */
 ];
 
