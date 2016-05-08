@@ -17,6 +17,7 @@ export interface Team {
   active: boolean;
   name?: string;
   stats?: { [key: number]: Stats };
+  allTimeStats?: Stats;
   logo?: string;
   mobile?: string;
   email?: string;
@@ -966,16 +967,45 @@ let teams: Team[] = [
 @Injectable()
 export class TeamsService {
 
-  constructor() { }
+  private allTimeStatsCalculated: boolean = false;
 
-  getAllTeams(): Team[] {
-
-    return teams;
+  constructor() {
+    this.calculateAllTimeStats();
   }
 
-  getActiveTeams(): Team[] {
-
-    return teams.filter(team => team.active);
+  getTeams(activeOnly?: boolean) {
+    if (activeOnly) {
+      return teams.filter(team => team.active);
+    } else {
+      return teams;
+    }
   }
 
+  private calculateAllTimeStats() {
+
+    if (!this.allTimeStatsCalculated) {
+
+      teams.forEach(team => {
+
+        team.allTimeStats = {
+          pointsFor: 0,
+          pointsAgainst: 0,
+          wins: 0,
+          losses: 0,
+          ties: 0,
+          playoffWins: 0,
+          playoffLosses: 0,
+          moneyWon: 0,
+          moneyLost: 0
+        };
+
+        for (let statsYear in team.stats) {
+          let yearStats = team.stats[statsYear];
+          for (let stat in team.allTimeStats) {
+            team.allTimeStats[stat] += yearStats[stat];
+          }
+        }
+      });
+    }
+  }
 }

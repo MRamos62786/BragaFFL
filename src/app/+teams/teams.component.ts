@@ -3,7 +3,7 @@ import {DomSanitizationService}from '@angular/platform-browser'
 import {MD_CARD_DIRECTIVES} from '@angular2-material/card';
 import {MdButton} from '@angular2-material/button';
 import {Team, TeamsService} from '../teams.service';
-import {MdIcon, MdIconRegistry} from '@angular2-material/icon';
+import {MdIcon} from '@angular2-material/icon';
 
 interface TeamComponent {
   team: Team,
@@ -30,7 +30,7 @@ export class TeamsComponent implements OnInit {
   constructor(sanitizer: DomSanitizationService, teamService: TeamsService) {
     this.santizer = sanitizer;
     this.teamService = teamService;
-    this.teams = this.teamService.getActiveTeams().map(team => {
+    this.teams = this.teamService.getTeams(true).map(team => {
       return <TeamComponent>{
         team: team,
         showLogo: !team.nsfwLogo
@@ -48,7 +48,7 @@ export class TeamsComponent implements OnInit {
 
   getTeams() {
 
-    return this.teamService.getActiveTeams();
+    return this.teamService.getTeams(true);
   }
 
   nsfwLogoBlurred(teamComp: TeamComponent) {

@@ -1,10 +1,10 @@
 <!doctype html>
 <html>
+
 <head>
   <meta charset="utf-8">
   <title>BragaFFL</title>
-  <base href="/">
-  {{content-for 'head'}}
+  <base href="/"> {{content-for 'head'}}
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -19,7 +19,13 @@
     }
   </script>
   -->
+  <style>
+    body {
+      font-family: Roboto, "Helvetica Neue", sans-serif;
+    }
+  </style>
 </head>
+
 <body>
   <braga-ffl-app>Loading...</braga-ffl-app>
 
@@ -35,4 +41,5 @@
     }).catch(console.error.bind(console));
   </script>
 </body>
+
 </html>

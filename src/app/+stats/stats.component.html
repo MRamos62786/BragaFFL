@@ -1,3 +1,19 @@
+<table>
+  <thead>
+    <tr>
+      <td *ngFor="let column of columns">{{getColumnName(column)}}<md-icon>{{getSortIcon(column)}}</md-icon></td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let team of teams">
+      <td>{{team.name}}</td>
+      <td>{{team.owner}}</td>
+      <td>{{team.allTimeStats.wins}}</td>
+      <td>{{team.allTimeStats.losses}}</td>
+      <td>{{team.allTimeStats.ties}}</td>
+    </tr>
+  </tbody>
+</table>
 <p>
-  stats works!
+  {{teams | json}}
 </p>
