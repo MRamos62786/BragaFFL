@@ -13,7 +13,8 @@ import {MdIcon, MdIconRegistry} from '@angular2-material/icon';
   directives: [
     MD_CARD_DIRECTIVES,
     MdButton,
-    MdIcon]
+    MdIcon
+    ]
 })
 export class TeamsComponent implements OnInit {
 
@@ -33,7 +34,7 @@ export class TeamsComponent implements OnInit {
   }
   
   getTeams() {
-    return this.teamService.getAllTeams();
+    return this.teamService.getActiveTeams();
   }
 
 }
