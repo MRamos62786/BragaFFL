@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-interface Stats {
+export interface Stats {
   pointsFor: number;
   pointsAgainst: number;
   wins: number;
@@ -12,7 +12,7 @@ interface Stats {
   moneyLost: number;
 }
 
-interface Team {
+export interface Team {
   owner: string;
   active: boolean;
   name?: string;

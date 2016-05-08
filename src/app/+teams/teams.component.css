@@ -20,6 +20,21 @@ md-card {
 }
 
 img {
-    width: 350px;
-    height: 300px
+  width: 350px;
+  height: 300px;
+}
+
+.nsfw {
+  filter: blur(30px);
+  -webkit-filter: blur(30px);
+  -moz-filter: blur(30px);
+  -o-filter: blur(30px);
+  -ms-filter: blur(30px);
+}
+
+.showNsfw {
+  -webkit-transition: 2s -webkit-filter linear;
+  -moz-transition: 2s -moz-filter linear;
+  -o-transition: 2s -o-filter linear;
+  transition: 2s -webkit-filter linear;
 }

@@ -1,14 +1,17 @@
 <div class="card-container">
-  <md-card *ngFor="let team of getTeams()">
-    <img md-card-image [alt]="team.name" [src]="team.logo">
-    <md-card-title>{{team.name}}</md-card-title>
+  <md-card *ngFor="let teamComp of teams">
+    <img md-card-image [alt]="teamComp.team.name" [src]="teamComp.team.logo" [class.nsfw]="teamComp.team.nsfwLogo">
+    <md-card-title>{{teamComp.team.name}}</md-card-title>
     <md-card-content class="secondary">
-      {{team.owner}}
+      {{teamComp.team.owner}}
     </md-card-content>
+    <md-card-actions>
+      <button md-icon-button (click)="1">Show Naughty Logo</button>
+    </md-card-actions>
     <md-card-actions align="end">
-      <button md-icon-button (click)="href('tel:' + team.mobile)"><md-icon>phone</md-icon></button>
-      <button md-icon-button (click)="href('sms:' + team.mobile)"><md-icon>sms</md-icon></button>
-      <button md-icon-button (click)="href('mailto:' + team.email)"><md-icon>mail</md-icon></button>
+      <button md-icon-button (click)="href('tel:' + teamComp.team.mobile)"><md-icon>phone</md-icon></button>
+      <button md-icon-button (click)="href('sms:' + teamComp.team.mobile)"><md-icon>sms</md-icon></button>
+      <button md-icon-button (click)="href('mailto:' + teamComp.team.email)"><md-icon>mail</md-icon></button>
     </md-card-actions>
   </md-card>
 </div>

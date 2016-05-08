@@ -2,8 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import {DomSanitizationService}from '@angular/platform-browser'
 import {MD_CARD_DIRECTIVES} from '@angular2-material/card';
 import {MdButton} from '@angular2-material/button';
-import {TeamsService} from '../teams.service';
+import {Team , TeamsService} from '../teams.service';
 import {MdIcon, MdIconRegistry} from '@angular2-material/icon';
+
+interface TeamComponent {
+  team: Team,
+  showLogo: boolean
+}
 
 @Component({
   moduleId: module.id,
@@ -20,10 +25,17 @@ export class TeamsComponent implements OnInit {
 
   santizer: DomSanitizationService;
   teamService: TeamsService;
+  teams: TeamComponent[];
 
   constructor(sanitizer: DomSanitizationService, teamService: TeamsService) {
     this.santizer = sanitizer;
     this.teamService = teamService;
+    this.teams = this.teamService.getActiveTeams().map(team => {
+      return <TeamComponent>{
+        team: team,
+        showLogo: !team.nsfwLogo
+      };
+    });
   }
 
   ngOnInit() {
