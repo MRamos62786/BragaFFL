@@ -13,6 +13,8 @@ import { Routes, Router, ROUTER_DIRECTIVES} from '@angular/router';
 import { TeamsComponent } from './+teams';
 import { RulebookComponent } from './+rulebook';
 import {TeamsService} from './teams.service';
+import { StatsComponent } from './+stats';
+import { DraftComponent } from './+draft';
 
 @Component({
   moduleId: module.id,
@@ -41,7 +43,9 @@ import {TeamsService} from './teams.service';
 @Routes([
   { path: '/home', component: HomeComponent },
   { path: '/teams', component: TeamsComponent },
-  { path: '/rulebook', component: RulebookComponent }
+  { path: '/rulebook', component: RulebookComponent },
+  {path: '/stats', component: StatsComponent},
+  {path: '/draft', component: DraftComponent}
 ])
 export class BragaFFLAppComponent implements OnInit {
   title: string = 'Braga FFL!';
@@ -64,6 +68,18 @@ export class BragaFFLAppComponent implements OnInit {
       description: "Know the rules!",
       icon: "sentiment_very_dissatisfied",
       route: "/rulebook"
+    },
+    {
+      name: "Stats",
+      description: "Know the winners!",
+      icon: "cake",
+      route: "/stats"
+    },
+    {
+      name: "Draft",
+      description: "Know whose taken!",
+      icon: "content_paste",
+      route: "/draft"
     }
   ];
 
