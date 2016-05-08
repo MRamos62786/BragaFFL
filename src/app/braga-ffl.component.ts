@@ -32,8 +32,11 @@ import {TeamsService} from './teams.service';
     MdIcon,
     ROUTER_DIRECTIVES
   ],
-  providers: [MdIconRegistry, MdRadioDispatcher, TeamsService],
-  
+  providers: [
+    MdIconRegistry,
+    MdRadioDispatcher,
+    TeamsService],
+
 })
 @Routes([
   { path: '/home', component: HomeComponent },

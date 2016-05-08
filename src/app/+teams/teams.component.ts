@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {DomSanitizationService}from '@angular/platform-browser'
 import {MD_CARD_DIRECTIVES} from '@angular2-material/card';
 import {MdButton} from '@angular2-material/button';
-import {Team , TeamsService} from '../teams.service';
+import {Team, TeamsService} from '../teams.service';
 import {MdIcon, MdIconRegistry} from '@angular2-material/icon';
 
 interface TeamComponent {
@@ -19,7 +19,7 @@ interface TeamComponent {
     MD_CARD_DIRECTIVES,
     MdButton,
     MdIcon
-    ]
+  ]
 })
 export class TeamsComponent implements OnInit {
 
@@ -42,11 +42,30 @@ export class TeamsComponent implements OnInit {
   }
 
   href(href: string) {
+
     window.location.href = href;
   }
-  
+
   getTeams() {
+
     return this.teamService.getActiveTeams();
+  }
+
+  nsfwLogoBlurred(teamComp: TeamComponent) {
+
+    return !teamComp.showLogo && teamComp.team.nsfwLogo;
+  }
+  
+  nsfwLogoShowing(teamComp: TeamComponent) {
+
+    return teamComp.showLogo && teamComp.team.nsfwLogo;
+  }
+
+  toggleBlurred(teamComp: TeamComponent, logo) {
+
+    teamComp.showLogo = !teamComp.showLogo;
+    //logo.className = 'showNsfw';
+   
   }
 
 }

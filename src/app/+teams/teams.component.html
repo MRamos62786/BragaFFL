@@ -1,12 +1,17 @@
 <div class="card-container">
   <md-card *ngFor="let teamComp of teams">
-    <img md-card-image [alt]="teamComp.team.name" [src]="teamComp.team.logo" [class.nsfw]="teamComp.team.nsfwLogo">
+    <img #logo md-card-image [alt]="teamComp.team.name" [src]="teamComp.team.logo" [class.nsfw]="nsfwLogoBlurred(teamComp)" [class.showNsfw]="nsfwLogoShowing(teamComp)">
     <md-card-title>{{teamComp.team.name}}</md-card-title>
     <md-card-content class="secondary">
       {{teamComp.team.owner}}
+      <div>TODO: Check device and show contact info instead of icons if on desktop</div>
     </md-card-content>
-    <md-card-actions>
-      <button md-icon-button (click)="1">Show Naughty Logo</button>
+    <md-card-actions *ngIf="teamComp.team.nsfwLogo">
+      <button md-button color="primary" (click)="toggleBlurred(teamComp,logo)">
+        <span *ngIf="teamComp.showLogo">Hide</span>
+        <span *ngIf="!teamComp.showLogo">Show</span>
+        Naughty Logo
+      </button>
     </md-card-actions>
     <md-card-actions align="end">
       <button md-icon-button (click)="href('tel:' + teamComp.team.mobile)"><md-icon>phone</md-icon></button>

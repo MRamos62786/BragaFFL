@@ -30,11 +30,22 @@ img {
   -moz-filter: blur(30px);
   -o-filter: blur(30px);
   -ms-filter: blur(30px);
+  transition: all 1s ease-out;
+  -webkit-transition: all 1s ease-out;
+  -moz-transition: all 1s ease-out;
+  -o-transition: all 1s ease-out;
+  -ms-transition: all 1s ease-out;
 }
 
 .showNsfw {
-  -webkit-transition: 2s -webkit-filter linear;
-  -moz-transition: 2s -moz-filter linear;
-  -o-transition: 2s -o-filter linear;
-  transition: 2s -webkit-filter linear;
+  filter: blur(0px);
+  -webkit-filter: blur(0px);
+  -moz-filter: blur(0px);
+  -o-filter: blur(0px);
+  -ms-filter: blur(0px);
+  transition: all 1s ease-in;
+  -webkit-transition: all 1s ease-in;
+  -moz-transition: all 1s ease-in;
+  -o-transition: all 1s ease-in;
+  -ms-transition: all 1s ease-in;
 }
