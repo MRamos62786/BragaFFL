@@ -3,13 +3,18 @@ import { Injectable } from '@angular/core';
 export interface Stats {
   pointsFor: number;
   pointsAgainst: number;
+  pointsForPerGame?: number;
+  pointsAgainstPerGame?: number;
   wins: number;
   losses: number;
   ties: number;
+  winPercentage?: number;
   playoffWins: number;
   playoffLosses: number;
+  playoffWinPercentage?: number;
   moneyWon: number;
   moneyLost: number;
+  moneyDiff?: number;
 }
 
 export interface Team {
@@ -23,6 +28,70 @@ export interface Team {
   email?: string;
   nsfwLogo?: boolean;
 }
+
+@Injectable()
+export class TeamsService {
+
+  private statsCalculated: boolean = false;
+
+  constructor() {
+    this.calculateStats();
+  }
+
+  getTeams(activeOnly?: boolean) {
+    if (activeOnly) {
+      return teams.filter(team => team.active);
+    } else {
+      return teams;
+    }
+  }
+
+  private calculateStats() {
+
+    if (!this.statsCalculated) {
+
+      teams.forEach(team => {
+
+        team.allTimeStats = {
+          pointsFor: 0,
+          pointsAgainst: 0,
+          wins: 0,
+          losses: 0,
+          ties: 0,
+          playoffWins: 0,
+          playoffLosses: 0,
+          moneyWon: 0,
+          moneyLost: 0
+        };
+
+        for (let statsYear in team.stats) {
+          let yearStats = team.stats[statsYear];
+          for (let stat in team.allTimeStats) {
+            this.performStatCalcs(yearStats);
+            team.allTimeStats[stat] += yearStats[stat];
+          }
+        }
+
+        this.performStatCalcs(team.allTimeStats);
+      });
+    }
+  }
+
+  private performStatCalcs(stats: Stats) {
+
+    let wins = stats.wins;
+    let games = wins + stats.losses + stats.ties;
+    let playoffWins = stats.playoffWins;
+    let playoffGames = playoffWins + stats.playoffLosses;
+    stats.pointsForPerGame = stats.pointsFor / games;
+    stats.pointsAgainstPerGame = stats.pointsAgainst / games;
+    stats.winPercentage = 100 * (wins / games);
+    stats.playoffWinPercentage = 100 * (playoffWins / playoffGames);
+    stats.moneyDiff = stats.moneyWon - stats.moneyLost;
+  }
+
+}
+
 
 let teams: Team[] = [
   {
@@ -963,49 +1032,3 @@ let teams: Team[] = [
     }
   }
 ];
-
-@Injectable()
-export class TeamsService {
-
-  private allTimeStatsCalculated: boolean = false;
-
-  constructor() {
-    this.calculateAllTimeStats();
-  }
-
-  getTeams(activeOnly?: boolean) {
-    if (activeOnly) {
-      return teams.filter(team => team.active);
-    } else {
-      return teams;
-    }
-  }
-
-  private calculateAllTimeStats() {
-
-    if (!this.allTimeStatsCalculated) {
-
-      teams.forEach(team => {
-
-        team.allTimeStats = {
-          pointsFor: 0,
-          pointsAgainst: 0,
-          wins: 0,
-          losses: 0,
-          ties: 0,
-          playoffWins: 0,
-          playoffLosses: 0,
-          moneyWon: 0,
-          moneyLost: 0
-        };
-
-        for (let statsYear in team.stats) {
-          let yearStats = team.stats[statsYear];
-          for (let stat in team.allTimeStats) {
-            team.allTimeStats[stat] += yearStats[stat];
-          }
-        }
-      });
-    }
-  }
-}

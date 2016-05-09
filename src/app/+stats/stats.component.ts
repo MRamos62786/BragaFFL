@@ -22,7 +22,6 @@ enum Column {
 export class StatsComponent implements OnInit {
 
   teamService: TeamsService;
-  teams: Team[];
   columns: Column[] = [
     Column.Team,
     Column.Owner,
@@ -30,36 +29,69 @@ export class StatsComponent implements OnInit {
     Column.Losses,
     Column.Ties,
   ];
-  sortColumn: Column;
+
+  sortColumn: Column = Column.Team;
   sortAscending: boolean = true;
 
+  statYear: number = 2015;
+  includeFormerOwners: boolean = false;
 
   constructor(teamService: TeamsService) {
 
     this.teamService = teamService;
-    this.teams = teamService.getTeams(true);
-
-    this.sortColumn = Column.Team;
+    this.sort();
   }
 
   ngOnInit() {
   }
 
+  getTeams() {
+     
+     return this.teamService.getTeams(!this.includeFormerOwners);
+  }
+
   sort() {
-    this.teams.sort((teamA, teamB) => {
+    this.getTeams().sort((teamA, teamB) => {
       return 0
     });
   }
-  
+
   getColumnName(column: Column) {
     return Column[column];
   }
 
-  getSortIcon(column: Column) {
-    if (this.sortColumn === column) {
-      return 'keyboard_arrow_down';
+  getColumnValue(column: Column, team: Team): string {
+
+    switch (column) {
+      case Column.Team:
+        return team.name;
+      case Column.Owner:
+        return team.owner;
+      default:
+        let stats: Stats;
+
+        if (this.statYear) {
+          stats = team.stats[this.statYear];
+        } else {
+          stats = team.allTimeStats;
+        }
+
+        if (stats) {
+          return stats[Column[column].toLowerCase()];
+        }
     }
   }
 
+  getSortIcon(column: Column) {
+    if (this.sortColumn !== column) {
 
+      return '';
+    } else if (this.sortAscending) {
+
+      return 'keyboard_arrow_up';
+    } else {
+
+      return 'keyboard_arrow_down';
+    }
+  }
 }

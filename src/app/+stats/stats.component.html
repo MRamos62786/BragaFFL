@@ -1,3 +1,13 @@
+<select [(ngModel)]="statYear">
+  <option value="">All Time</option>
+  <option value="2015">2015</option>
+  <option value="2014">2014</option>
+  <option value="2013">2013</option>
+  <option value="2012">2012</option>
+  <option value="2011">2011</option>
+  <option value="2010">2010</option>
+</select>
+<input type="checkbox" [(ngModel)]="includeFormerOwners">Include Former Owners
 <table>
   <thead>
     <tr>
@@ -5,12 +15,8 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let team of teams">
-      <td>{{team.name}}</td>
-      <td>{{team.owner}}</td>
-      <td>{{team.allTimeStats.wins}}</td>
-      <td>{{team.allTimeStats.losses}}</td>
-      <td>{{team.allTimeStats.ties}}</td>
+    <tr *ngFor="let team of getTeams()">
+      <td *ngFor="let column of columns">{{getColumnValue(column,team)}}</td>
     </tr>
   </tbody>
 </table>
