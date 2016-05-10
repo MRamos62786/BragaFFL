@@ -7,15 +7,20 @@
   <option value="2011">2011</option>
   <option value="2010">2010</option>
 </select>
-<input type="checkbox" [(ngModel)]="includeFormerOwners">Include Former Owners
+<input type="checkbox" [(ngModel)]="includeFormerOwners" (onchange)="loadTeams(true)">Include Former Owners (FUCK!!!)
+<select [(ngModel)]="columns" multiple>
+  <option *ngFor="let column of columns" [value]="column">{{getColumnName(column)}}</option>
+</select>
 <table>
   <thead>
     <tr>
-      <td *ngFor="let column of columns">{{getColumnName(column)}}<md-icon>{{getSortIcon(column)}}</md-icon></td>
+      <th *ngFor="let column of columns" (click)="sortBy(column)">{{getColumnName(column)}}
+        <md-icon>{{getSortIcon(column)}}</md-icon>
+      </th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let team of getTeams()">
+    <tr *ngFor="let team of teams">
       <td *ngFor="let column of columns">{{getColumnValue(column,team)}}</td>
     </tr>
   </tbody>

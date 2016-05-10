@@ -9,3 +9,4 @@ if (environment.production) {
 }
 
 bootstrap(BragaFFLAppComponent, [HTTP_PROVIDERS, ROUTER_PROVIDERS]);
+
